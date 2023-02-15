@@ -1,24 +1,22 @@
-﻿using System;
-using System.Text;
-using CaptchaValidationSample.Captcha;
+﻿using CaptchaValidationSample.Captcha;
+using System;
+using System.Linq;
 
 namespace CaptchaValidationSample.Providers
 {
+    //TODO: refactor this as discussed
+    //CaptchService -> IImageGenerator, IRepository
+    //Captch
+    //Validate
     public class CaptchaImageProvider : ICaptchaImageProvider
     {
-        private readonly CaptchaFont _fontOptions = new CaptchaFont();
-        private readonly Style _styleOptions = new Style();
-
         public byte[] GenerateCaptchaImage()
         {
-
             var options = new CaptchaOptions
             {
-                Width = 150,
+                Width = 200,
                 Height = 50,
-                Text = GenerateCaptchaCode(),
-                Font = _fontOptions,
-                Styles = _styleOptions
+                Text = GenerateCaptchaCode()
             };
 
             var generator = new CaptchaImageGenerator(options);
@@ -27,19 +25,13 @@ namespace CaptchaValidationSample.Providers
 
         private string GenerateCaptchaCode()
         {
-            var letters = "1234567890ABCDEFGHJKLMNPRTUVWXYZabcdefghijklmnopqurstuvwxyz";
-
+            var letters = "1234567890ABCDEFGHJKLMNPRTUVWXYZabcdefghijklmnopqurstuvwxyz";            
             var rand = new Random();
-            var maxRand = 6;
+            var randomChars = letters.Select(_ => letters[rand.Next(letters.Length)])
+                                     .Take(6);
+            var result = string.Concat(randomChars.ToArray());
 
-            var sb = new StringBuilder();
-            for (var i = 0; i < 6; i++)
-            {
-                var index = rand.Next(maxRand);
-                sb.Append(letters[index]);
-            }
-
-            return sb.ToString();
+            return result;
         }
     }
 }

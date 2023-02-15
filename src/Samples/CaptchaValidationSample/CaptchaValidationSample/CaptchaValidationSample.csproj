@@ -139,7 +139,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Captcha\CaptchaFont.cs" />
     <Compile Include="Captcha\CaptchaImageGenerator.cs" />
+    <Compile Include="Captcha\CaptchaHatchStyle.cs" />
+    <Compile Include="Captcha\CaptchaOptions.cs" />
+    <Compile Include="Captcha\CaptchColor.cs" />
+    <Compile Include="Captcha\ImageExtensions.cs" />
+    <Compile Include="Captcha\RandomHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
